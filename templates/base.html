@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "Aurora Chat" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='favicon.svg') }}"
+    />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div id="app">{% block content %}{% endblock %}</div>
+    <script id="app-config" type="application/json">
+      {{ {
+          "apiBaseUrl": config["API_BASE_URL"],
+          "availableProviders": config["AVAILABLE_PROVIDERS"],
+          "defaultProvider": config["DEFAULT_PROVIDER"]
+      } | tojson | safe }}
+    </script>
+    <script>
+      window.APP_CONFIG = JSON.parse(
+        document.getElementById("app-config").textContent
+      );
+    </script>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

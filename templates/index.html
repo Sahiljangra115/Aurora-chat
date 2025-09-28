@@ -1,0 +1,183 @@
+{% extends "base.html" %} {% block head %}
+<meta
+  name="description"
+  content="Aurora Chat – a modern AI chat experience with your choice of API or local models."
+/>
+{% endblock %} {% block content %}
+<header class="hero">
+  <nav class="navbar">
+    <div class="brand">Aurora Chat</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#chat">Chat</a>
+      <a href="#setup">Setup</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Ask smarter.<br />Build faster.</h1>
+      <p>
+        Connect to OpenRouter, Gemini, Claude, or your own local Ollama model in
+        minutes. Aurora Chat is a plug-and-play AI companion for builders who
+        want control.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#chat">Launch Chat</a>
+        <a class="btn ghost" href="#setup">View Setup</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="glass-card">
+        <h3>Quick Switch</h3>
+        <p>Select cloud or local models on the fly.</p>
+        <div class="model-tags">
+          <span>OpenRouter</span>
+          <span>Gemini</span>
+          <span>Claude</span>
+          <span>Ollama</span>
+        </div>
+      </div>
+      <div class="glass-card chat-preview">
+        <div class="chat-bubble user">How do I deploy this?</div>
+        <div class="chat-bubble bot">
+          Run <code>flask run</code> and start exploring. It just works.
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features" class="section features">
+  <h2>Why developers pick Aurora</h2>
+  <div class="feature-grid">
+    <article>
+      <h3>Bring your own model</h3>
+      <p>
+        Toggle between OpenRouter-hosted LLMs or your local Ollama models
+        whenever you want.
+      </p>
+    </article>
+    <article>
+      <h3>Real-time conversations</h3>
+      <p>
+        Stream responses in a chat interface designed for focus, productivity,
+        and context.
+      </p>
+    </article>
+    <article>
+      <h3>Secure by design</h3>
+      <p>
+        Your API keys stay on your machine and never leave your environment.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section id="chat" class="section chat">
+  <div class="panel settings">
+    <h2>Session settings</h2>
+    <form id="session-form">
+      <label for="provider">Provider</label>
+      <select id="provider" name="provider"></select>
+      <p id="provider-description" class="hint muted"></p>
+
+      <label for="model">Model</label>
+      <input
+        type="text"
+        id="model"
+        name="model"
+        placeholder="e.g. openai/gpt-4o"
+      />
+
+      <label for="temperature">Temperature</label>
+      <input
+        type="range"
+        id="temperature"
+        name="temperature"
+        min="0"
+        max="1"
+        value="0.7"
+        step="0.1"
+      />
+
+      <label for="top_p">Top P</label>
+      <input
+        type="range"
+        id="top_p"
+        name="top_p"
+        min="0"
+        max="1"
+        value="0.9"
+        step="0.1"
+      />
+
+      <label for="apiKey" class="token-label">API Key</label>
+      <input
+        type="password"
+        id="apiKey"
+        name="apiKey"
+        placeholder="Enter API key (kept locally)"
+        autocomplete="off"
+      />
+
+      <div class="hint">
+        Your credentials never leave the browser. They are sent only to your
+        local backend.
+      </div>
+
+      <button type="submit" class="btn primary full">Save Session</button>
+    </form>
+  </div>
+  <div class="panel chat-ui">
+    <div class="chat-header">
+      <h2>Chat</h2>
+      <button id="clear-btn" class="btn ghost small" type="button">
+        Clear
+      </button>
+    </div>
+    <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
+    <form id="chat-form" class="chat-form">
+      <textarea
+        id="message"
+        name="message"
+        rows="2"
+        placeholder="Ask me anything..."
+        required
+      ></textarea>
+      <button type="submit" class="btn primary">Send</button>
+    </form>
+  </div>
+</section>
+
+<section id="setup" class="section setup">
+  <h2>Plug-and-play in minutes</h2>
+  <div class="setup-grid">
+    <article>
+      <h3>1. Clone the repo</h3>
+      <p>
+        Use <code>git clone</code> and install the Python requirements with
+        <code>pip install -r requirements.txt</code>.
+      </p>
+    </article>
+    <article>
+      <h3>2. Configure</h3>
+      <p>
+        Drop your OpenRouter key into <code>.env</code> or pick a local Ollama
+        model like <code>llama3</code>.
+      </p>
+    </article>
+    <article>
+      <h3>3. Run</h3>
+      <p>
+        Start the backend with <code>flask run</code> and open
+        <code>http://localhost:5000</code>.
+      </p>
+    </article>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Built for builders. Contributions welcome.</p>
+</footer>
+{% endblock %}
